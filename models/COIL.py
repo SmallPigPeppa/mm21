@@ -19,6 +19,7 @@ milestones = [80, 120]
 lrate_decay = 0.1
 batch_size = 128
 memory_size = 2000
+memory_size = 500
 T = 2
 
 
@@ -83,8 +84,9 @@ class COIL(BaseLearner):
 
     def incremental_train(self, data_manager):
         self._cur_task += 1
-        self._total_classes = self._known_classes + data_manager.get_task_size(self._cur_task)
-        
+        # self._total_classes = self._known_classes + data_manager.get_task_size(self._cur_task)
+        self._total_classes = 100
+
         self._network.update_fc(self._total_classes, self.nextperiod_initialization)
         self.data_manager=data_manager
 
