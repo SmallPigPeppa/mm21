@@ -28,7 +28,8 @@ class COIL(BaseLearner):
 
     def __init__(self, args):
         super().__init__()
-        self._network = SimpleCosineIncrementalNet(args['convnet_type'], False)
+        # self._network = SimpleCosineIncrementalNet(args['convnet_type'], False)
+        self._network = SimpleCosineIncrementalNet(args['convnet_type'], True)
         self._device = args['device']
         self.data_manager=None
         self.nextperiod_initialization=None
