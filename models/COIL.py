@@ -13,7 +13,7 @@ from torch import nn
 import copy
 EPSILON = 1e-8
 
-epochs = 1
+epochs = 160
 lrate = 0.1
 milestones = [80, 120]
 lrate_decay = 0.1
