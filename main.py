@@ -4,14 +4,6 @@ from trainer import train
 import pprint
 
 
-def main():
-    _utils_pp = pprint.PrettyPrinter()
-    args = setup_parser().parse_args()
-    args = vars(args)
-    _utils_pp.pprint(args)
-
-    
-    train(args)
 
 
 def setup_parser():
@@ -32,6 +24,14 @@ def setup_parser():
     parser.add_argument('--reg_term',type=float,default=1e-3,help='Regularization term of backward transfering distillation loss')
     return parser
 
+
+_utils_pp = pprint.PrettyPrinter()
+args = setup_parser().parse_args()
+args = vars(args)
+_utils_pp.pprint(args)
+
+def main():
+    train(args)
 
 if __name__ == '__main__':
     main()
