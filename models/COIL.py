@@ -19,7 +19,8 @@ milestones = [80, 120]
 lrate_decay = 0.1
 batch_size = 128
 # memory_size = 2000
-memory_size = 500
+# memory_size = 500
+memory_size = 1000
 T = 2
 
 
