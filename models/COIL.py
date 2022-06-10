@@ -57,7 +57,8 @@ class COIL(BaseLearner):
             _mu1_vec=torch.ones(len(former_class_means))/len(former_class_means)*1.0
             _mu2_vec=torch.ones(len(next_period_class_means))/len(former_class_means)*1.0
             T=ot.sinkhorn(_mu1_vec,_mu2_vec,Q_cost_matrix,self.sinkhorn_reg) 
-            T=torch.tensor(T).float().cuda()
+            T=torch.tensor(T).float().cuda(int(self._device))
+            # T = torch.tensor(T).float().cuda()
             transformed_hat_W=torch.mm(T.T,F.normalize(self._network.fc.weight, p=2, dim=1))
             oldnorm=(torch.norm(self._network.fc.weight,p=2,dim=1))
             newnorm=(torch.norm(transformed_hat_W*len(former_class_means),p=2,dim=1))
@@ -78,7 +79,8 @@ class COIL(BaseLearner):
         _mu1_vec=torch.ones(len(former_class_means))/len(former_class_means)*1.
         _mu2_vec=torch.ones(len(next_period_class_means))/len(former_class_means)*1.
         T=ot.sinkhorn(_mu2_vec,_mu1_vec,Q_cost_matrix,self.sinkhorn_reg) 
-        T=torch.tensor(T).float().cuda()
+        # T=torch.tensor(T).float().cuda()
+        T = torch.tensor(T).float().cuda(int(self._device))
         transformed_hat_W=torch.mm(T.T,F.normalize(self._network.fc.weight[-current_class_num:,:], p=2, dim=1))
         return transformed_hat_W*len(former_class_means)*self.calibration_term
 
