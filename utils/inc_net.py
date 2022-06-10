@@ -8,7 +8,7 @@ from convs.ucir_resnet import resnet18 as cosine_resnet18
 from convs.ucir_resnet import resnet34 as cosine_resnet34
 from convs.ucir_resnet import resnet50 as cosine_resnet50
 from convs.linears import SimpleLinear, SplitCosineLinear, CosineLinear
-
+import argparse
 
 def get_convnet(convnet_type, pretrained=False):
     name = convnet_type.lower()
@@ -186,7 +186,7 @@ class SimpleCosineIncrementalNet(BaseNet):
         super().__init__(convnet_type, pretrained)
 
     def update_fc(self, nb_classes, nextperiod_initialization):
-        fc = self.generate_fc(self.feature_dim, nb_classes).cuda()
+        fc = self.generate_fc(self.feature_dim, nb_classes).cuda(4)
         if self.fc is not None:
             nb_output = self.fc.out_features
             weight = copy.deepcopy(self.fc.weight.data)
